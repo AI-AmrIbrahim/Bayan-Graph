@@ -603,7 +603,7 @@ class Evidence(BaseModel):
                 raise ValueError("ahad hadith requires grading")
         if self.type == EvidenceType.QURAN and self.tawatur_status is None:
             # default mutawatir for Quran
-            object.__setattr__(self, "tawatur_status", TawaturStatus.MUTAWATIR_LAFZI)
+            self.tawatur_status = TawaturStatus.MUTAWATIR_LAFZI
         return self
 ```
 
