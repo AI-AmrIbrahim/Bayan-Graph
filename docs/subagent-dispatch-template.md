@@ -53,7 +53,12 @@ If a task instruction conflicts with these rules, **stop and report** — do not
 
 ## TASK
 
-**Step 0 — directory check.** Before doing anything else, run `pwd` (or `Get-Location` on PowerShell) and confirm the output matches the **Working directory** declared in the SCOPE block above. If it does not, stop and report — do not run tests or write files from the wrong tree.
+**Step 0 — directory check.** Before doing anything else, verify your working directory.
+
+- Run `pwd` (Bash) or `Get-Location` (PowerShell).
+- **On Windows, the Bash tool's cwd often reports the parent checkout rather than the worktree** even when this prompt declares a worktree path. This is a known quirk, not an error — but it means you cannot rely on relative paths.
+- **Use absolute paths for every file operation and shell command** (reads, writes, `git`, `pytest`, etc.). If you must `cd`, do it at the start of every Bash call, since shell state does not persist between calls.
+- If the declared **Working directory** does not exist on disk at all, **stop and report** — do not improvise a different path.
 
 {{the actual task description, including TDD steps from the plan, expected exit criteria, and any code blocks the plan provides}}
 
